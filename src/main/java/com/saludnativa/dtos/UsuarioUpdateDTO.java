@@ -14,7 +14,7 @@ public class UsuarioUpdateDTO {
     private String ap_paterno;
     private String ap_materno;
     private String celular;
-    private String email;
+    //private String email; //El email no debe actualizarse es único
     private String contrasenia;
     private Integer intentos_login;
     private Rol rol;
