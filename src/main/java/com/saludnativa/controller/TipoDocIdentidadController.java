@@ -13,33 +13,33 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins ="http://localhost:4200")
+//@CrossOrigin(origins ="http://localhost:4200")
 public class TipoDocIdentidadController {
 
     @Autowired
     private TipoDocIdentidadService tipoDocIdentidadService;
 
-    @GetMapping("TipoDocIdentidad")
+    @GetMapping("tipoDocIdentidad")
     public ResponseEntity<List<TipoDocIdentidadDTO>> listarTipoDocIdentidads(){
         return new ResponseEntity<>(tipoDocIdentidadService.listarTipoDocIdentidad(), HttpStatus.OK);
     }
 
-    @GetMapping("/TipoDocIdentidad/{TipoDocIdentidadId}")
+    @GetMapping("/tipoDocIdentidad/{tipoDocIdentidadId}")
     public ResponseEntity<TipoDocIdentidadDTO> obtenerTipoDocIdentidadPorId(@PathVariable("tipoDocIdentidadId") long tipoDocIdentidadId){
         return new ResponseEntity<>(tipoDocIdentidadService.obtenerTipoDocIdentidadPorID(tipoDocIdentidadId),HttpStatus.OK);
     }
 
-    @PostMapping("TipoDocIdentidad")
+    @PostMapping("tipoDocIdentidad")
     public ResponseEntity<TipoDocIdentidadDTO> registrarTipoDocIdentidad(@RequestBody TipoDocIdentidadCreateDTO tipoDocIdentidadCreateDTO){
         return new ResponseEntity<>(tipoDocIdentidadService.registrarTipoDocIdentidad(tipoDocIdentidadCreateDTO),HttpStatus.OK);
     }
 
-    @PutMapping("TipoDocIdentidad")
+    @PutMapping("tipoDocIdentidad")
     public ResponseEntity<TipoDocIdentidadDTO> actualizarTipoDocIdentidad(@RequestBody TipoDocIdentidadUpdateDTO tipoDocIdentidadUpdateDTO){
         return new ResponseEntity<>(tipoDocIdentidadService.actualizarTipoDocIdentidad(tipoDocIdentidadUpdateDTO),HttpStatus.OK);
     }
 
-    @DeleteMapping("/TipoDocIdentidad/{TipoDocIdentidadId}")
+    @DeleteMapping("/tipoDocIdentidad/{tipoDocIdentidadId}")
     public ResponseEntity<String> eliminarTipoDocIdentidad(@PathVariable("TipoDocIdentidadId") long tipoDocIdentidadId){
         return new ResponseEntity<>(tipoDocIdentidadService.eliminarTipoDocIdentidad(tipoDocIdentidadId),HttpStatus.OK);
     }
