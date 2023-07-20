@@ -46,5 +46,5 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "id_estado_usuario")
-    private EstadoUsuario estadoUsuario;
+    private Estado estado;
 }

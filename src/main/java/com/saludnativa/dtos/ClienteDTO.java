@@ -22,5 +22,5 @@ public class ClienteDTO {
     //private Distrito distrito;
     //private Provincia provincia;
     //private Departamento departamento;
-    private EstadoUsuario estadoUsuario;
+    private Estado estado;
 }

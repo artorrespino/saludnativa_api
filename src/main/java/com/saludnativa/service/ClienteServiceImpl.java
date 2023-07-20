@@ -5,7 +5,7 @@ import com.saludnativa.dtos.ClienteDTO;
 import com.saludnativa.dtos.ClienteUpdateDTO;
 import com.saludnativa.mappers.ClienteMapper;
 import com.saludnativa.model.Cliente;
-import com.saludnativa.model.EstadoUsuario;
+import com.saludnativa.model.Estado;
 import com.saludnativa.model.TipoDocIdentidad;
 import com.saludnativa.model.Usuario;
 import com.saludnativa.repository.ClienteRepository;
@@ -70,9 +70,9 @@ public class ClienteServiceImpl implements ClienteService {
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);
         if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
-            EstadoUsuario estadoEliminado = new EstadoUsuario();
-            estadoEliminado.setId_estado_usuario(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
-            cliente.setEstadoUsuario(estadoEliminado);
+            Estado estadoEliminado = new Estado();
+            estadoEliminado.setId_estado(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            cliente.setEstado(estadoEliminado);
             clienteRepository.save(cliente);
             return "Cliente eliminado correctamente";
         } else {

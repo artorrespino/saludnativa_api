@@ -1,6 +1,6 @@
 package com.saludnativa.dtos;
 
-import com.saludnativa.model.EstadoUsuario;
+import com.saludnativa.model.Estado;
 import com.saludnativa.model.Rol;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +17,5 @@ public class UsuarioCreateDTO {
     private String contrasenia;
     private Integer intentos_login;
     private Rol rol;
-    private EstadoUsuario estadoUsuario;
+    private Estado estado;
 }

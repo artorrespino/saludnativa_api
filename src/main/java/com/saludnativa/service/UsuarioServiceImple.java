@@ -4,7 +4,7 @@ import com.saludnativa.dtos.UsuarioCreateDTO;
 import com.saludnativa.dtos.UsuarioDTO;
 import com.saludnativa.dtos.UsuarioUpdateDTO;
 import com.saludnativa.mappers.UsuarioMapper;
-import com.saludnativa.model.EstadoUsuario;
+import com.saludnativa.model.Estado;
 import com.saludnativa.model.Usuario;
 import com.saludnativa.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +53,9 @@ public class UsuarioServiceImple implements UsuarioService {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
-            EstadoUsuario estadoEliminado = new EstadoUsuario();
-            estadoEliminado.setId_estado_usuario(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
-            usuario.setEstadoUsuario(estadoEliminado);
+            Estado estadoEliminado = new Estado();
+            estadoEliminado.setId_estado(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            usuario.setEstado(estadoEliminado);
             usuarioRepository.save(usuario);
             return "Usuario eliminado correctamente";
         } else {

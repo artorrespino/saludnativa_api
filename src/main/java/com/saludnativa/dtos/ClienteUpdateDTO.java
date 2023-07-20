@@ -19,6 +19,6 @@ public class ClienteUpdateDTO {
     //private Distrito distrito;
     //private Provincia provincia;
     //private Departamento departamento;
-    private EstadoUsuario estadoUsuario;
+    private Estado estado;
 
 }

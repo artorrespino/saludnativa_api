@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EstadoUsuarioCreateDTO {
+public class EstadoDTO {
 
-    private String estado_usuario;
+    private Long id_estado;
+    private String estado;
 }

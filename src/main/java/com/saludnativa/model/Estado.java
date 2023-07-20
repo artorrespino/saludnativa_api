@@ -8,17 +8,17 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name="tb_estado_usuario")
+@Table(name="tb_estado")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EstadoUsuario {
+public class Estado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_estado_usuario;
+    private Long id_estado;
 
     @Column(length = 20, nullable = false )
-    private String estado_usuario;
+    private String estado;
 }
