@@ -54,7 +54,7 @@ public class UsuarioServiceImple implements UsuarioService {
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             EstadoUsuario estadoEliminado = new EstadoUsuario();
-            estadoEliminado.setId_estado_usuario(3L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            estadoEliminado.setId_estado_usuario(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
             usuario.setEstadoUsuario(estadoEliminado);
             usuarioRepository.save(usuario);
             return "Usuario eliminado correctamente";

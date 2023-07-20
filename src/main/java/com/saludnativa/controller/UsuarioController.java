@@ -30,7 +30,7 @@ public class UsuarioController {
     }
 
     @PostMapping("usuarios")
-    public ResponseEntity<UsuarioDTO> registrarTipoDocumento(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
+    public ResponseEntity<UsuarioDTO> registrarUsuario(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
         return new ResponseEntity<>(usuarioService.registrarUsuario(usuarioCreateDTO),HttpStatus.OK);
     }
 

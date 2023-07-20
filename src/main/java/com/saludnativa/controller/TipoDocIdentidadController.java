@@ -40,7 +40,7 @@ public class TipoDocIdentidadController {
     }
 
     @DeleteMapping("/tipoDocIdentidad/{tipoDocIdentidadId}")
-    public ResponseEntity<String> eliminarTipoDocIdentidad(@PathVariable("TipoDocIdentidadId") long tipoDocIdentidadId){
+    public ResponseEntity<String> eliminarTipoDocIdentidad(@PathVariable("tipoDocIdentidadId") long tipoDocIdentidadId){
         return new ResponseEntity<>(tipoDocIdentidadService.eliminarTipoDocIdentidad(tipoDocIdentidadId),HttpStatus.OK);
     }
 }
