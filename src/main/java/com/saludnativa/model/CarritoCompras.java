@@ -22,13 +22,13 @@ public class CarritoCompras {
     private Long id_carrito;
 
     @OneToOne
-    @JoinColumn(name = "id_cliente ")
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
     @Column(name="fecha_registro_carrito", nullable = false)
     private LocalDate fec_registro_carrito;
 
-    @OneToMany(mappedBy = "carrito_compras")
+    @OneToMany(mappedBy = "carritoCompras")
     private List<DetalleCarritoCompras> detalleCarritoCompras;
 
 

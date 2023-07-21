@@ -2,7 +2,6 @@ package com.saludnativa.controller;
 
 import com.saludnativa.dtos.CarritoComprasCreateDTO;
 import com.saludnativa.dtos.CarritoComprasDTO;
-import com.saludnativa.dtos.CarritoComprasUpdateDTO;
 import com.saludnativa.service.CarritoComprasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,13 +33,4 @@ public class CarritoComprasController {
         return new ResponseEntity<>(carritoComprasService.registrarCarritoCompras(carritoComprasCreateDTO), HttpStatus.OK);
     }
 
-    @PutMapping("/carritoCompras")
-    public ResponseEntity<CarritoComprasDTO> actualizarCarritoCompras(@RequestBody CarritoComprasUpdateDTO carritoComprasUpdateDTO) {
-        return new ResponseEntity<>(carritoComprasService.actualizarCarritoCompras(carritoComprasUpdateDTO), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/carritoCompras/{carritoComprasId}")
-    public ResponseEntity<String> eliminarCarritoCompras(@PathVariable("carritoComprasId") long carritoComprasId) {
-        return new ResponseEntity<>(carritoComprasService.eliminarCarritoCompras(carritoComprasId), HttpStatus.OK);
-    }
 }

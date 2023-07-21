@@ -1,14 +1,16 @@
 package com.saludnativa.service;
 
-import com.saludnativa.dtos.CarritoComprasCreateDTO;
-import com.saludnativa.dtos.CarritoComprasDTO;
-import com.saludnativa.dtos.CarritoComprasUpdateDTO;
+import com.saludnativa.dtos.*;
 import com.saludnativa.mappers.CarritoComprasMapper;
+import com.saludnativa.mappers.DetalleCarritoComprasMapper;
 import com.saludnativa.model.CarritoCompras;
+import com.saludnativa.model.DetalleCarritoCompras;
 import com.saludnativa.repository.CarritoComprasRepository;
+import com.saludnativa.repository.DetalleCarritoComprasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,49 +22,53 @@ public class CarritoComprasServiceImpl implements CarritoComprasService {
     @Autowired
     private CarritoComprasRepository carritoComprasRepository;
 
+    @Autowired
+    private DetalleCarritoComprasRepository detalleCarritoComprasRepository;
+
     @Override
     public List<CarritoComprasDTO> listarCarritoCompras() {
-        return CarritoComprasMapper.INSTANCIA.listaCarritoComprasAListaCarritoComprasDTO(carritoComprasRepository.findAll());
+        List<CarritoComprasDTO> lista = CarritoComprasMapper.INSTANCIA.listaCarritoComprasAListaCarritoComprasDTO(carritoComprasRepository.findAll());
+        for (CarritoComprasDTO carritoComprasDTO : lista){
+            List<DetalleCarritoComprasDTO> detalleCarritoComprasDTO = DetalleCarritoComprasMapper.INSTANCIA.listaDetalleCarritoAListaDetalleCarritoDTO(detalleCarritoComprasRepository.findByCarritoCompras_Id_Carrito(carritoComprasDTO.getId_carrito())
+            );
+            carritoComprasDTO.setDetalleCarritoDTO(detalleCarritoComprasDTO);
+        }
+
+        return lista;
     }
+
 
     @Override
     public CarritoComprasDTO obtenerCarritoComprasPorID(long id) {
-        return carritoComprasRepository.findById(id)
-                .map(CarritoComprasMapper.INSTANCIA::carritoComprasACarritoComprasDTO)
-                .orElse(null);
+        Optional<CarritoCompras> carrito = carritoComprasRepository.findById(id);
+        CarritoComprasDTO carritoComprasDTO = null;
+        if(carrito.isPresent()){
+            carritoComprasDTO = CarritoComprasMapper.INSTANCIA.carritoComprasACarritoComprasDTO(carrito.get());
+            carritoComprasDTO.setDetalleCarritoDTO(
+                    DetalleCarritoComprasMapper.INSTANCIA.listaDetalleCarritoAListaDetalleCarritoDTO(detalleCarritoComprasRepository.findByCarritoCompras_Id_Carrito(carrito.get().getId_carrito()))
+            );
+        }
+        return carritoComprasDTO;
     }
 
     @Override
+    @Transactional
     public CarritoComprasDTO registrarCarritoCompras(CarritoComprasCreateDTO carritoComprasCreateDTO) {
-        CarritoCompras carritoCompras = CarritoComprasMapper.INSTANCIA.carritoComprasCreateDTOACarritoCompras(carritoComprasCreateDTO);
 
-        // Obtener la fecha actual y establecerla en el campo fec_registro_carrito
-        carritoCompras.setFec_registro_carrito(LocalDate.now());
+        CarritoCompras carrito=CarritoComprasMapper.INSTANCIA.carritoComprasCreateDTOACarritoCompras(carritoComprasCreateDTO);
+        CarritoCompras respuestaEntity=carritoComprasRepository.save(carrito);
 
-        CarritoCompras carritoComprasGuardado = carritoComprasRepository.save(carritoCompras);
-        return CarritoComprasMapper.INSTANCIA.carritoComprasACarritoComprasDTO(carritoComprasGuardado);
-    }
+        for (DetalleCarritoComprasCreateDTO detCarritoCreateDTO : carritoComprasCreateDTO.getDetalleCarritoCreateDTO()){
+            DetalleCarritoCompras detalleCarrito = DetalleCarritoComprasMapper.INSTANCIA.detalleCarritoCreateDTOADetalleCarrito(detCarritoCreateDTO);
+            detalleCarrito.setCarritoCompras(respuestaEntity);
+            detalleCarritoComprasRepository.save(detalleCarrito);
+        }
 
-    @Override
-    public CarritoComprasDTO actualizarCarritoCompras(CarritoComprasUpdateDTO carritoComprasUpdateDTO) {
-        CarritoCompras carritoCompras = CarritoComprasMapper.INSTANCIA.carritoComprasUpdateDTOACarritoCompras(carritoComprasUpdateDTO);
-
-        // Obtener la fecha actual y establecerla en el campo fec_registro_carrito
-        carritoCompras.setFec_registro_carrito(LocalDate.now());
-
-        CarritoCompras carritoComprasActualizado = carritoComprasRepository.save(carritoCompras);
-        return CarritoComprasMapper.INSTANCIA.carritoComprasACarritoComprasDTO(carritoComprasActualizado);
-    }
-
-    @Override
-    public String eliminarCarritoCompras(long id) {
-        Optional<CarritoCompras> carritoComprasOptional = carritoComprasRepository.findById(id);
-        carritoComprasOptional.ifPresentOrElse(
-                carritoCompras -> carritoComprasRepository.deleteById(id),
-                () -> {
-                    throw new NoSuchElementException("No se encontró el carrito de compras con id = " + id);
-                }
+        CarritoComprasDTO respuestaDTO= CarritoComprasMapper.INSTANCIA.carritoComprasACarritoComprasDTO(carritoComprasRepository.getById(respuestaEntity.getId_carrito()));
+        respuestaDTO.setDetalleCarritoDTO(
+                DetalleCarritoComprasMapper.INSTANCIA.listaDetalleCarritoAListaDetalleCarritoDTO(detalleCarritoComprasRepository.findByCarritoCompras_Id_Carrito(respuestaEntity.getId_carrito()))
         );
-        return "Carrito de compras eliminado";
+        return respuestaDTO;
     }
+
 }

@@ -34,13 +34,4 @@ public class EstadoController {
         return new ResponseEntity<>(EstadoService.registrarEstado(estadoCreateDTO),HttpStatus.OK);
     }
 
-    @PutMapping("estados")
-    public ResponseEntity<EstadoDTO> actualizarEstado(@RequestBody EstadoUpdateDTO estadoUpdateDTO){
-        return new ResponseEntity<>(EstadoService.actualizarEstado(estadoUpdateDTO),HttpStatus.OK);
-    }
-
-    @DeleteMapping("/estados/{estadoId}")
-    public ResponseEntity<String> eliminarEstado(@PathVariable("estadoId") long estadoId){
-        return new ResponseEntity<>(EstadoService.eliminarEstado(estadoId),HttpStatus.OK);
-    }
 }
