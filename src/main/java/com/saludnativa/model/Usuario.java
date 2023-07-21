@@ -45,6 +45,6 @@ public class Usuario {
     private Rol rol;
 
     @ManyToOne
-    @JoinColumn(name = "id_estado_usuario")
+    @JoinColumn(name = "id_estado")
     private Estado estado;
 }
