@@ -3,7 +3,7 @@ package com.saludnativa.controller;
 import com.saludnativa.dtos.CategoriaProductoCreateDTO;
 import com.saludnativa.dtos.CategoriaProductoDTO;
 import com.saludnativa.dtos.CategoriaProductoUpdateDTO;
-import com.saludnativa.service.CategoriaProductoService;
+import com.saludnativa.repository.service.CategoriaProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

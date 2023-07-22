@@ -2,7 +2,7 @@ package com.saludnativa.controller;
 
 import com.saludnativa.dtos.CarritoComprasCreateDTO;
 import com.saludnativa.dtos.CarritoComprasDTO;
-import com.saludnativa.service.CarritoComprasService;
+import com.saludnativa.repository.service.CarritoComprasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

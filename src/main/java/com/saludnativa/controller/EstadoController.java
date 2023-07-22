@@ -2,8 +2,7 @@ package com.saludnativa.controller;
 
 import com.saludnativa.dtos.EstadoCreateDTO;
 import com.saludnativa.dtos.EstadoDTO;
-import com.saludnativa.dtos.EstadoUpdateDTO;
-import com.saludnativa.service.EstadoService;
+import com.saludnativa.repository.service.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,9 @@
-package com.saludnativa.service;
+package com.saludnativa.repository.service;
 
 import com.saludnativa.dtos.ProveedorCreateDTO;
 import com.saludnativa.dtos.ProveedorDTO;
 import com.saludnativa.dtos.ProveedorUpdateDTO;
 import com.saludnativa.mappers.ProveedorMapper;
-import com.saludnativa.model.Cliente;
 import com.saludnativa.model.Estado;
 import com.saludnativa.model.Proveedor;
 import com.saludnativa.repository.ProveedorRepository;
@@ -53,7 +52,7 @@ public class ProveedorServiceImpl implements ProveedorService {
         if (proveedorOptional.isPresent()) {
             Proveedor proveedor = proveedorOptional.get();
             Estado estadoEliminado = new Estado();
-            estadoEliminado.setId_estado(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
             proveedor.setEstado(estadoEliminado);
             proveedorRepository.save(proveedor);
             return "Proveedor eliminado correctamente";

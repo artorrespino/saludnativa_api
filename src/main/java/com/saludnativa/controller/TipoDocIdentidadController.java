@@ -3,7 +3,7 @@ package com.saludnativa.controller;
 import com.saludnativa.dtos.TipoDocIdentidadCreateDTO;
 import com.saludnativa.dtos.TipoDocIdentidadDTO;
 import com.saludnativa.dtos.TipoDocIdentidadUpdateDTO;
-import com.saludnativa.service.TipoDocIdentidadService;
+import com.saludnativa.repository.service.TipoDocIdentidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

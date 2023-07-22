@@ -1,4 +1,4 @@
-package com.saludnativa.service;
+package com.saludnativa.repository.service;
 
 import com.saludnativa.dtos.RolCreateDTO;
 import com.saludnativa.dtos.RolDTO;

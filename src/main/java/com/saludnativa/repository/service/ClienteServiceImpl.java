@@ -1,4 +1,4 @@
-package com.saludnativa.service;
+package com.saludnativa.repository.service;
 
 import com.saludnativa.dtos.ClienteCreateDTO;
 import com.saludnativa.dtos.ClienteDTO;
@@ -7,7 +7,6 @@ import com.saludnativa.mappers.ClienteMapper;
 import com.saludnativa.model.Cliente;
 import com.saludnativa.model.Estado;
 import com.saludnativa.model.TipoDocIdentidad;
-import com.saludnativa.model.Usuario;
 import com.saludnativa.repository.ClienteRepository;
 import com.saludnativa.repository.TipoDocIdentidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +70,7 @@ public class ClienteServiceImpl implements ClienteService {
         if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
             Estado estadoEliminado = new Estado();
-            estadoEliminado.setId_estado(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
             cliente.setEstado(estadoEliminado);
             clienteRepository.save(cliente);
             return "Cliente eliminado correctamente";

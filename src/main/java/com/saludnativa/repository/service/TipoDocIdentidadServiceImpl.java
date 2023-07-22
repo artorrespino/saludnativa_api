@@ -1,10 +1,9 @@
-package com.saludnativa.service;
+package com.saludnativa.repository.service;
 
 import com.saludnativa.dtos.TipoDocIdentidadCreateDTO;
 import com.saludnativa.dtos.TipoDocIdentidadDTO;
 import com.saludnativa.dtos.TipoDocIdentidadUpdateDTO;
 import com.saludnativa.mappers.TipoDocIdentidadMapper;
-import com.saludnativa.model.Rol;
 import com.saludnativa.model.TipoDocIdentidad;
 import com.saludnativa.repository.TipoDocIdentidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;

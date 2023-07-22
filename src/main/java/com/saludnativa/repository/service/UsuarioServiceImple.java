@@ -1,4 +1,4 @@
-package com.saludnativa.service;
+package com.saludnativa.repository.service;
 
 import com.saludnativa.dtos.UsuarioCreateDTO;
 import com.saludnativa.dtos.UsuarioDTO;
@@ -54,7 +54,7 @@ public class UsuarioServiceImple implements UsuarioService {
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             Estado estadoEliminado = new Estado();
-            estadoEliminado.setId_estado(5L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
             usuario.setEstado(estadoEliminado);
             usuarioRepository.save(usuario);
             return "Usuario eliminado correctamente";

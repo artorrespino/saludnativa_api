@@ -1,4 +1,4 @@
-package com.saludnativa.service;
+package com.saludnativa.repository.service;
 
 import com.saludnativa.dtos.TipoDocIdentidadCreateDTO;
 import com.saludnativa.dtos.TipoDocIdentidadDTO;
