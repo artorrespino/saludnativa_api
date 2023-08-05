@@ -1,4 +1,4 @@
-package com.saludnativa.repository.service;
+package com.saludnativa.service;
 
 import com.saludnativa.dtos.CarritoComprasCreateDTO;
 import com.saludnativa.dtos.CarritoComprasDTO;

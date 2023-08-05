@@ -5,6 +5,8 @@ import com.saludnativa.model.Proveedor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class ProductoCreateDTO {
@@ -12,8 +14,8 @@ public class ProductoCreateDTO {
     private String nombre_producto ;
     private String imagen_producto  ;
     private String descripcion_producto  ;
-    private String precio_unitario_producto  ;
-    private String stock_producto  ;
+    private BigDecimal precio_unitario_producto  ;
+    private Integer stock_producto  ;
     private CategoriaProducto categoriaProducto ;
     private Proveedor proveedor  ;
 }

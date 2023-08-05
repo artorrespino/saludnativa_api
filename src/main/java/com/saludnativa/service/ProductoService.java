@@ -1,4 +1,4 @@
-package com.saludnativa.repository.service;
+package com.saludnativa.service;
 
 import com.saludnativa.dtos.ProductoCreateDTO;
 import com.saludnativa.dtos.ProductoDTO;
@@ -12,5 +12,5 @@ public interface ProductoService {
     ProductoDTO obtenerProductoPorID(long id);
     ProductoDTO registrarProducto(ProductoCreateDTO productoCreateDTO);
     ProductoDTO actualizarProducto(ProductoUpdateDTO productoUpdateDTO);
-    String eliminarProducto(long id);
+    ProductoDTO eliminarProducto(long id);
 }

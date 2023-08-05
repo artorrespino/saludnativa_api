@@ -1,4 +1,4 @@
-package com.saludnativa.repository.service;
+package com.saludnativa.service;
 
 import com.saludnativa.dtos.ProductoCreateDTO;
 import com.saludnativa.dtos.ProductoDTO;
@@ -48,14 +48,17 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public String eliminarProducto(long id) {
+    public ProductoDTO eliminarProducto(long id) {
         Optional<Producto> productoOptional = productoRepository.findById(id);
-        productoOptional.ifPresentOrElse(
-                producto -> productoRepository.deleteById(id),
-                () -> {
-                    throw new NoSuchElementException("No se encontró el producto con id = " + id);
-                }
-        );
-        return "Registro de producto eliminado";
+        if (productoOptional.isPresent()) {
+            ProductoDTO productoDTO = ProductoMapper.INSTANCIA.productoAProductoDTO(productoOptional.get());
+            productoRepository.delete(productoOptional.get());
+            return productoDTO;
+        } else {
+            throw new NoSuchElementException("No se pudo realizar la eliminación para el ID proporcionado");
+        }
+
+
+
     }
 }

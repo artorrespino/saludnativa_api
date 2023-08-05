@@ -3,8 +3,8 @@ package com.saludnativa.controller;
 import com.saludnativa.dtos.ClienteCreateDTO;
 import com.saludnativa.dtos.ClienteDTO;
 import com.saludnativa.dtos.ClienteUpdateDTO;
-import com.saludnativa.repository.service.ClienteService;
-import com.saludnativa.repository.service.TipoDocIdentidadService;
+import com.saludnativa.service.ClienteService;
+import com.saludnativa.service.TipoDocIdentidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins ="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClienteController {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.saludnativa.repository.service;
+package com.saludnativa.service;
 
 import com.saludnativa.dtos.*;
 import com.saludnativa.mappers.CarritoComprasMapper;

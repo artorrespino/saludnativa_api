@@ -3,7 +3,7 @@ package com.saludnativa.controller;
 import com.saludnativa.dtos.ProductoCreateDTO;
 import com.saludnativa.dtos.ProductoDTO;
 import com.saludnativa.dtos.ProductoUpdateDTO;
-import com.saludnativa.repository.service.ProductoService;
+import com.saludnativa.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins ="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductoController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class ProductoController {
     }
 
     @DeleteMapping("/productos/{productoId}")
-    public ResponseEntity<String> eliminarProducto(@PathVariable("productoId") long productoId) {
+    public ResponseEntity<ProductoDTO> eliminarProducto(@PathVariable("productoId") long productoId) {
         return new ResponseEntity<>(productoService.eliminarProducto(productoId), HttpStatus.OK);
     }
 }

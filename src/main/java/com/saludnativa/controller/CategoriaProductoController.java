@@ -3,7 +3,7 @@ package com.saludnativa.controller;
 import com.saludnativa.dtos.CategoriaProductoCreateDTO;
 import com.saludnativa.dtos.CategoriaProductoDTO;
 import com.saludnativa.dtos.CategoriaProductoUpdateDTO;
-import com.saludnativa.repository.service.CategoriaProductoService;
+import com.saludnativa.service.CategoriaProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins ="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaProductoController {
 
     @Autowired

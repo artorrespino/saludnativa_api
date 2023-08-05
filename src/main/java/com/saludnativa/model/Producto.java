@@ -23,7 +23,7 @@ public class Producto {
     @Column(length = 100, nullable = false )
     private String nombre_producto ;
 
-    @Column(length = 100, nullable = false )
+    @Column(length = 500)
     private String imagen_producto  ;
 
     @Column(length = 200, nullable = false )

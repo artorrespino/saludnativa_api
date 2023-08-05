@@ -2,7 +2,7 @@ package com.saludnativa.controller;
 
 import com.saludnativa.dtos.EstadoCreateDTO;
 import com.saludnativa.dtos.EstadoDTO;
-import com.saludnativa.repository.service.EstadoService;
+import com.saludnativa.service.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-//@CrossOrigin(origins ="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EstadoController {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.saludnativa.repository.service;
+package com.saludnativa.service;
 
 import com.saludnativa.dtos.ProveedorCreateDTO;
 import com.saludnativa.dtos.ProveedorDTO;
