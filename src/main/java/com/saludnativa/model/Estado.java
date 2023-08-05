@@ -21,4 +21,10 @@ public class Estado {
 
     @Column(length = 20, nullable = false )
     private String estado;
+
+    @PrePersist
+    public void prePersist() {
+        // Establecer el valor por defecto para el estado "activo" (1)
+        this.id_estado = 1L;
+    }
 }

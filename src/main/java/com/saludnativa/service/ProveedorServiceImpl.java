@@ -6,6 +6,7 @@ import com.saludnativa.dtos.ProveedorUpdateDTO;
 import com.saludnativa.mappers.ProveedorMapper;
 import com.saludnativa.model.Estado;
 import com.saludnativa.model.Proveedor;
+import com.saludnativa.repository.EstadoRepository;
 import com.saludnativa.repository.ProveedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class ProveedorServiceImpl implements ProveedorService {
 
     @Autowired
     private ProveedorRepository proveedorRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
 
     @Override
     public List<ProveedorDTO> listarProveedores() {
@@ -35,6 +39,8 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Override
     public ProveedorDTO registrarProveedor(ProveedorCreateDTO proveedorCreateDTO) {
         Proveedor proveedor = ProveedorMapper.INSTANCIA.proveedorCreateDTOAProveedor(proveedorCreateDTO);
+        Estado estadoActivo = estadoRepository.findById(1L).orElse(null);// Obtener el estado activo desde la base de datos por su ID
+        proveedor.setEstado(estadoActivo);// Asignar el estado activo al proveedor antes de guardarlo
         Proveedor proveedorGuardado = proveedorRepository.save(proveedor);
         return ProveedorMapper.INSTANCIA.proveedorAProveedorDTO(proveedorGuardado);
     }

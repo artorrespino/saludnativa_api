@@ -32,6 +32,9 @@ public class Proveedor {
     private String celular_proveedor  ;
 
     @ManyToOne
-    @JoinColumn(name = "id_estado")
-    private Estado estado ;
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
+    private Estado estado;
+
+
+
 }
