@@ -28,6 +28,12 @@ public class ProveedorController {
         return new ResponseEntity<>(proveedorService.listarProveedores(), HttpStatus.OK);
     }
 
+    @GetMapping("/proveedoresactivos")
+    public ResponseEntity<List<ProveedorDTO>> listarProveedoresActivos() {
+        List<ProveedorDTO> proveedoresActivos = proveedorService.listarProveedoresActivos();
+        return new ResponseEntity<>(proveedoresActivos, HttpStatus.OK);
+    }
+
     @GetMapping("/proveedores/{proveedorId}")
     public ResponseEntity<ProveedorDTO> obtenerProveedorPorId(@PathVariable("proveedorId") long proveedorId) {
         return new ResponseEntity<>(proveedorService.obtenerProveedorPorID(proveedorId), HttpStatus.OK);
@@ -44,7 +50,7 @@ public class ProveedorController {
     }
 
     @DeleteMapping("/proveedores/{proveedorId}")
-    public ResponseEntity<String> eliminarProveedor(@PathVariable("proveedorId") long proveedorId) {
+    public ResponseEntity<ProveedorDTO> eliminarProveedor(@PathVariable("proveedorId") long proveedorId) {
         return new ResponseEntity<>(proveedorService.eliminarProveedor(proveedorId), HttpStatus.OK);
     }
 }

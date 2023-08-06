@@ -9,8 +9,10 @@ import java.util.List;
 public interface ProveedorService {
 
     List<ProveedorDTO> listarProveedores();
+    List<ProveedorDTO> listarProveedoresActivos();
     ProveedorDTO obtenerProveedorPorID(long id);
     ProveedorDTO registrarProveedor(ProveedorCreateDTO proveedorCreateDTO);
     ProveedorDTO actualizarProveedor(ProveedorUpdateDTO proveedorUpdateDTO);
-    String eliminarProveedor(long id);
+    ProveedorDTO eliminarProveedor(long id);
+
 }

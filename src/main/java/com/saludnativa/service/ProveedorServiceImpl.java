@@ -30,6 +30,13 @@ public class ProveedorServiceImpl implements ProveedorService {
     }
 
     @Override
+    public List<ProveedorDTO> listarProveedoresActivos() {
+        List<Proveedor> proveedoresActivos = proveedorRepository.findByEstadoIdEstado(1L);
+        return ProveedorMapper.INSTANCIA.listaProveedorAListaProveedorDTO(proveedoresActivos);
+    }
+
+
+    @Override
     public ProveedorDTO obtenerProveedorPorID(long id) {
         return proveedorRepository.findById(id)
                 .map(ProveedorMapper.INSTANCIA::proveedorAProveedorDTO)
@@ -53,17 +60,18 @@ public class ProveedorServiceImpl implements ProveedorService {
     }
 
     @Override
-    public String eliminarProveedor(long id) {
+    public ProveedorDTO eliminarProveedor(long id) {
         Optional<Proveedor> proveedorOptional = proveedorRepository.findById(id);
         if (proveedorOptional.isPresent()) {
             Proveedor proveedor = proveedorOptional.get();
             Estado estadoEliminado = new Estado();
-            estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 2
             proveedor.setEstado(estadoEliminado);
             proveedorRepository.save(proveedor);
-            return "Proveedor eliminado correctamente";
+            ProveedorDTO proveedorDTO = ProveedorMapper.INSTANCIA.proveedorAProveedorDTO(proveedor);
+            return proveedorDTO;
         } else {
-            throw new NoSuchElementException("No se encontró el proveedor con ID = " + id);
+            throw new NoSuchElementException("No se pudo realizar la eliminación para el ID proporcionado");
         }
     }
 }
