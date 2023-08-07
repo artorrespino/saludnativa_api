@@ -1,21 +1,15 @@
-package com.saludnativa.model;
+package com.saludnativa.dtos;
 
-import lombok.AllArgsConstructor;
+import com.saludnativa.model.Departamento;
+import com.saludnativa.model.Distrito;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
-
-@Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class Provincia {
+public class ProvinciaDTO {
 
-    @Id
     private String idUbigeo;
     private String nombreUbigeo;
     private String codigoUbigeo;
@@ -24,12 +18,6 @@ public class Provincia {
     private String numeroHijosUbigeo;
     private String nivelUbigeo;
     private String idPadreUbigeo;
-
-    @ManyToOne
     private Departamento departamento;
-
-    @OneToMany(mappedBy = "provincia")
     private List<Distrito> distritos;
-
-
 }
