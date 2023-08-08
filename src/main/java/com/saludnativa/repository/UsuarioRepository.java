@@ -1,6 +1,5 @@
 package com.saludnativa.repository;
 
-import com.saludnativa.model.Proveedor;
 import com.saludnativa.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

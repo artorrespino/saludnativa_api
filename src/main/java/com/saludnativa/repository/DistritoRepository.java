@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DistritoRepository extends JpaRepository<Distrito, Long> {
+public interface DistritoRepository extends JpaRepository<Distrito, String> {
+    List<Distrito> findDistritosByDepartamentoIdAndProvinciaId(String departamentoId, String provinciaId);
 }

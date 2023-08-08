@@ -16,9 +16,9 @@ public class ClienteUpdateDTO {
     private TipoDocIdentidad tipoDocIdentidad;
     private String num_doc_identidad;
     private String direccion;
-    //private Distrito distrito;
-    //private Provincia provincia;
-    //private Departamento departamento;
+    private Distrito distrito;
+    private Provincia provincia;
+    private Departamento departamento;
     private Estado estado;
 
 }

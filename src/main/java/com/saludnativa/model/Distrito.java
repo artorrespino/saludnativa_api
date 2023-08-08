@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "ubigeo_peru_districts")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,15 +16,17 @@ import javax.persistence.ManyToOne;
 public class Distrito {
 
     @Id
-    private String idUbigeo;
-    private String nombreUbigeo;
-    private String codigoUbigeo;
-    private String etiquetaUbigeo;
-    private String buscadorUbigeo;
-    private String numeroHijosUbigeo;
-    private String nivelUbigeo;
-    private String idPadreUbigeo;
+    @Column(name = "id")
+    private String id;
+
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne
+    @JoinColumn(name = "province_id")
     private Provincia provincia;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Departamento departamento;
 }

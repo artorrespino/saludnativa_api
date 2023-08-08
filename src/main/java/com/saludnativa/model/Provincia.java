@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "ubigeo_peru_provinces")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,20 +17,15 @@ import java.util.List;
 public class Provincia {
 
     @Id
-    private String idUbigeo;
-    private String nombreUbigeo;
-    private String codigoUbigeo;
-    private String etiquetaUbigeo;
-    private String buscadorUbigeo;
-    private String numeroHijosUbigeo;
-    private String nivelUbigeo;
-    private String idPadreUbigeo;
+    @Column(name = "id")
+    private String id;
+
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne
+    @JoinColumn(name = "department_id")
     private Departamento departamento;
-
-    @OneToMany(mappedBy = "provincia")
-    private List<Distrito> distritos;
 
 
 }

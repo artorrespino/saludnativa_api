@@ -9,13 +9,8 @@ import lombok.Setter;
 @Setter
 public class DistritoDTO {
 
-    private String idUbigeo;
-    private String nombreUbigeo;
-    private String codigoUbigeo;
-    private String etiquetaUbigeo;
-    private String buscadorUbigeo;
-    private String numeroHijosUbigeo;
-    private String nivelUbigeo;
-    private String idPadreUbigeo;
-    private Provincia provincia;
+    private String id;
+    private String name;
+    private ProvinciaDTO provincia;
+    private DepartamentoDTO departamento;
 }

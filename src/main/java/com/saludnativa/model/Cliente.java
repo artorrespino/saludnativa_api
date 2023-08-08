@@ -36,7 +36,7 @@ public class Cliente {
 
     @Column(length = 150, nullable = false )
     private String direccion;
-/*
+
     @ManyToOne
     @JoinColumn(name = "distrito")
     private Distrito distrito;
@@ -48,8 +48,6 @@ public class Cliente {
     @ManyToOne
     @JoinColumn(name = "departamento")
     private Departamento departamento;
-
- */
 
     @ManyToOne
     @JoinColumn(name = "id_estado")

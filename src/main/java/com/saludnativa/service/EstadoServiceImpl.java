@@ -17,16 +17,16 @@ import java.util.Optional;
 public class EstadoServiceImpl implements EstadoService {
 
     @Autowired
-    private EstadoRepository EstadoRepository;
+    private EstadoRepository estadoRepository;
 
     @Override
     public List<EstadoDTO> listarEstado() {
-        return EstadoMapper.INSTANCIA.listaEstadoAListaEstadoDTO( EstadoRepository.findAll());
+        return EstadoMapper.INSTANCIA.listaEstadoAListaEstadoDTO( estadoRepository.findAll());
     }
 
     @Override
     public EstadoDTO obtenerEstadoPorID(long id) {
-        return EstadoRepository.findById(id)
+        return estadoRepository.findById(id)
                 .map(EstadoMapper.INSTANCIA::EstadoAEstadoDTO)
                 .orElse(null);
     }
@@ -34,7 +34,7 @@ public class EstadoServiceImpl implements EstadoService {
     @Override
     public EstadoDTO registrarEstado(EstadoCreateDTO EstadoCreateDTO) {
         Estado Estado=EstadoMapper.INSTANCIA.EstadoCreateDTOAEstado(EstadoCreateDTO);
-        Estado respuestaEntity=EstadoRepository.save(Estado);
+        Estado respuestaEntity=estadoRepository.save(Estado);
         EstadoDTO respuestaDTO = EstadoMapper.INSTANCIA.EstadoAEstadoDTO(respuestaEntity);
         return respuestaDTO;
     }
@@ -42,16 +42,16 @@ public class EstadoServiceImpl implements EstadoService {
     @Override
     public EstadoDTO actualizarEstado(EstadoUpdateDTO EstadoUpdateDTO) {
         Estado Estado=EstadoMapper.INSTANCIA.EstadoUptadeDTOAEstado(EstadoUpdateDTO);
-        Estado respuestaEntity=EstadoRepository.save(Estado);
+        Estado respuestaEntity=estadoRepository.save(Estado);
         EstadoDTO respuestaDTO = EstadoMapper.INSTANCIA.EstadoAEstadoDTO(respuestaEntity);
         return respuestaDTO;
     }
 
     @Override
     public String eliminarEstado(long id) {
-        Optional<Estado> EstadoOptional= EstadoRepository.findById(id);
+        Optional<Estado> EstadoOptional= estadoRepository.findById(id);
         EstadoOptional.ifPresentOrElse(// Si el Optional contiene un estado, se ejecutará la primera lambda con el Estado como argumento, que simplemente eliminará el estado de usuario mediante
-                Estado -> EstadoRepository.deleteById(id),
+                Estado -> estadoRepository.deleteById(id),
                 ()->{
                     throw new NoSuchElementException("No se encontró el estado con id = " + id);// Si el Optional está vacío, se ejecutará la segunda lambda, que lanzará una excepción NoSuchElementException indicando que no se encontró el estado de usuario con el ID especificado.
                 }
