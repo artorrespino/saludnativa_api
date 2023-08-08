@@ -9,8 +9,9 @@ import java.util.List;
 public interface UsuarioService {
 
     List<UsuarioDTO> listarUsuario();
+    List<UsuarioDTO> listarUsuariosActivos();
     UsuarioDTO obtenerUsuarioPorID(long id);
     UsuarioDTO registrarUsuario(UsuarioCreateDTO usuarioCreateDTO);
     UsuarioDTO actualizarUsuario(UsuarioUpdateDTO usuarioUpdateDTO);
-    String eliminarUsuario(long id);
+    UsuarioDTO eliminarUsuario(long id);
 }

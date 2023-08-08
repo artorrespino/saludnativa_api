@@ -1,5 +1,6 @@
 package com.saludnativa.controller;
 
+import com.saludnativa.dtos.ProveedorDTO;
 import com.saludnativa.dtos.UsuarioCreateDTO;
 import com.saludnativa.dtos.UsuarioDTO;
 import com.saludnativa.dtos.UsuarioUpdateDTO;
@@ -24,6 +25,12 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.listarUsuario(), HttpStatus.OK);
     }
 
+    @GetMapping("/usuariosactivos")
+    public ResponseEntity<List<UsuarioDTO>> listarUsuariosActivos() {
+        List<UsuarioDTO> usuariosActivos = usuarioService.listarUsuariosActivos();
+        return new ResponseEntity<>(usuariosActivos, HttpStatus.OK);
+    }
+
     @GetMapping("/usuarios/{usuarioId}")
     public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable("usuarioId") long usuarioId){
         return new ResponseEntity<>(usuarioService.obtenerUsuarioPorID(usuarioId),HttpStatus.OK);
@@ -40,7 +47,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/usuarios/{usuarioId}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable("usuarioId") long usuarioId){
+    public ResponseEntity<UsuarioDTO> eliminarUsuario(@PathVariable("usuarioId") long usuarioId){
         return new ResponseEntity<>(usuarioService.eliminarUsuario(usuarioId),HttpStatus.OK);
     }
 }

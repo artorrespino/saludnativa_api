@@ -6,6 +6,7 @@ import com.saludnativa.dtos.UsuarioUpdateDTO;
 import com.saludnativa.mappers.UsuarioMapper;
 import com.saludnativa.model.Estado;
 import com.saludnativa.model.Usuario;
+import com.saludnativa.repository.EstadoRepository;
 import com.saludnativa.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,18 @@ public class UsuarioServiceImple implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private EstadoRepository estadoRepository;
+
     @Override
     public List<UsuarioDTO> listarUsuario() {
         return UsuarioMapper.INSTANCIA.listaUsuarioAListaUsuarioDTO(usuarioRepository.findAll());
+    }
+
+    @Override
+    public List<UsuarioDTO> listarUsuariosActivos() {
+        List<Usuario> usuariosActivos = usuarioRepository.findByEstadoIdEstado(1L);
+        return UsuarioMapper.INSTANCIA.listaUsuarioAListaUsuarioDTO(usuariosActivos);
     }
 
     @Override
@@ -35,9 +45,10 @@ public class UsuarioServiceImple implements UsuarioService {
     @Override
     public UsuarioDTO registrarUsuario(UsuarioCreateDTO usuarioCreateDTO) {
         Usuario usuario = UsuarioMapper.INSTANCIA.usuarioCreateDTOAUsuario(usuarioCreateDTO);
-        Usuario respuestaEntity = usuarioRepository.save(usuario);
-        UsuarioDTO respuestaDTO = UsuarioMapper.INSTANCIA.usuarioAUsuarioDTO(respuestaEntity);
-        return respuestaDTO;
+        Estado estadoActivo = estadoRepository.findById(1L).orElse(null);// Obtener el estado activo desde la base de datos por su ID
+        usuario.setEstado(estadoActivo);// Asignar el estado activo al usuario antes de guardarlo
+        Usuario usuarioGuardado = usuarioRepository.save(usuario);
+        return UsuarioMapper.INSTANCIA.usuarioAUsuarioDTO((usuarioGuardado));
     }
 
     @Override
@@ -49,15 +60,16 @@ public class UsuarioServiceImple implements UsuarioService {
     }
 
     @Override
-    public String eliminarUsuario(long id) {
+    public UsuarioDTO eliminarUsuario(long id) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             Estado estadoEliminado = new Estado();
-            estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
+            estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 2
             usuario.setEstado(estadoEliminado);
             usuarioRepository.save(usuario);
-            return "Usuario eliminado correctamente";
+            UsuarioDTO usuarioDTO = UsuarioMapper.INSTANCIA.usuarioAUsuarioDTO(usuario);
+            return usuarioDTO;
         } else {
             throw new NoSuchElementException("No se encontró el usuario con ID = " + id);
         }
