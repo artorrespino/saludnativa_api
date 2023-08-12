@@ -1,7 +1,9 @@
 package com.saludnativa.service;
 
 import com.saludnativa.dtos.DepartamentoDTO;
+import com.saludnativa.dtos.ProvinciaDTO;
 import com.saludnativa.mappers.DepartamentoMapper;
+import com.saludnativa.mappers.ProvinciaMapper;
 import com.saludnativa.model.Departamento;
 import com.saludnativa.model.Provincia;
 import com.saludnativa.repository.DepartamentoRepository;
@@ -17,17 +19,9 @@ public class DepartamentoServiceImpl implements DepartamentoService{
     @Autowired
     private DepartamentoRepository departamentoRepository;
 
-    @Autowired
-    private ProvinciaRepository provinciaRepository;
-
     @Override
-    public List<DepartamentoDTO> getDepartmentsByProvince(String provinciaId) {
-        Provincia provincia = provinciaRepository.findById(provinciaId).orElse(null);
-        if (provincia == null) {
-            throw new IllegalArgumentException("Provincia no encontrada con el ID proporcionado: " + provinciaId);
-        }
-
-        List<Departamento> departamentos = departamentoRepository.findDepartamentosByProvincia(provincia);
-        return DepartamentoMapper.INSTANCE.departmentListToDepartmentDTOList(departamentos);
+    public List<DepartamentoDTO> getAllDepartaments() {
+        return DepartamentoMapper.INSTANCE.departmentListToDepartmentDTOList(departamentoRepository.findAll());
     }
+
 }

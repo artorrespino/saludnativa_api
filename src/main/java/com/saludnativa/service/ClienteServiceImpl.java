@@ -8,6 +8,7 @@ import com.saludnativa.model.Cliente;
 import com.saludnativa.model.Estado;
 import com.saludnativa.model.TipoDocIdentidad;
 import com.saludnativa.repository.ClienteRepository;
+import com.saludnativa.repository.EstadoRepository;
 import com.saludnativa.repository.TipoDocIdentidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class ClienteServiceImpl implements ClienteService {
     private ClienteRepository clienteRepository;
     @Autowired
     private TipoDocIdentidadRepository tipoDocIdentidadRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
 
     @Override
     public List<ClienteDTO> listarClientes() {
@@ -49,6 +53,8 @@ public class ClienteServiceImpl implements ClienteService {
 
         cliente.setTipoDocIdentidad(tipoDocIdentidad); // Establecer el TipoDocumento en el Cliente
 //----------------------------------------------------------------------------------------------------
+        Estado estadoActivo = estadoRepository.findById(1L).orElse(null);// Obtener el estado activo desde la base de datos por su ID
+        cliente.setEstado(estadoActivo);// Asignar el estado activo al usuario antes de guardarlo
 
         Cliente respuestaEntity = clienteRepository.save(cliente);
         ClienteDTO respuestaDTO = ClienteMapper.INSTANCIA.clienteAClienteDTO(respuestaEntity);
@@ -65,7 +71,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public String eliminarCliente(long id) {
+    public ClienteDTO eliminarCliente(long id) {
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);
         if (clienteOptional.isPresent()) {
             Cliente cliente = clienteOptional.get();
@@ -73,7 +79,8 @@ public class ClienteServiceImpl implements ClienteService {
             estadoEliminado.setId_estado(2L); // Depende de la tb_estado_usuario ID del estado "eliminado" es 3
             cliente.setEstado(estadoEliminado);
             clienteRepository.save(cliente);
-            return "Cliente eliminado correctamente";
+            ClienteDTO clienteDTO = ClienteMapper.INSTANCIA.clienteAClienteDTO(cliente);
+            return clienteDTO;
         } else {
             throw new NoSuchElementException("No se encontró el cliente con ID = " + id);
         }

@@ -26,18 +26,19 @@ public class UbigeoPeruController {
     @Autowired
     private DistritoService distritoService;
 
-    @GetMapping("/provincias")
-    public ResponseEntity<List<ProvinciaDTO>> getAllProvincias() {
-        List<ProvinciaDTO> provincias = provinciaService.getAllProvincias();
-        return ResponseEntity.ok(provincias);
-    }
 
-    @GetMapping("/departamentos/{provinciaId}")
-    public ResponseEntity<List<DepartamentoDTO>> getDepartmentsByProvince(@PathVariable String provinciaId) {
-        List<DepartamentoDTO> departamentos = departamentoService.getDepartmentsByProvince(provinciaId);
+
+    @GetMapping("/departamentos")
+    public ResponseEntity<List<DepartamentoDTO>> getAllDepartaments() {
+        List<DepartamentoDTO> departamentos = departamentoService.getAllDepartaments();
         return ResponseEntity.ok(departamentos);
     }
 
+    @GetMapping("/provincias/{departamentoId}")
+    public ResponseEntity<List<ProvinciaDTO>> getProvinceByDepartament(@PathVariable String departamentoId) {
+        List<ProvinciaDTO> provincias = provinciaService.getProvinceByDepartments(departamentoId);
+        return ResponseEntity.ok(provincias);
+    }
     @GetMapping("/distritos/{departamentoId}/{provinciaId}")
     public ResponseEntity<List<DistritoDTO>> getDistrictsByDepartmentAndProvince(
             @PathVariable String departamentoId, @PathVariable String provinciaId) {

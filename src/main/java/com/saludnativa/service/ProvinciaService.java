@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ProvinciaService {
 
-    List<ProvinciaDTO> getAllProvincias();
+    List<ProvinciaDTO> getProvinceByDepartments(String departamentoId);
 }

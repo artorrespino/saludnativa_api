@@ -23,7 +23,7 @@ public class ClienteController {
     @Autowired
     private TipoDocIdentidadService tipoDocIdentidadService;
 
-    @GetMapping("clientes")
+    @GetMapping("/clientes")
     public ResponseEntity<List<ClienteDTO>> listarClientes(){
         return new ResponseEntity<>(clienteService.listarClientes(), HttpStatus.OK);
     }
@@ -33,19 +33,19 @@ public class ClienteController {
         return new ResponseEntity<>(clienteService.obtenerClientesPorID(clienteId),HttpStatus.OK);
     }
 
-    @PostMapping("clientes")
+    @PostMapping("/clientes")
     public ResponseEntity<ClienteDTO> registrarCliente(@RequestBody ClienteCreateDTO clienteCreateDTO){
 
         return new ResponseEntity<>(clienteService.registrarCliente(clienteCreateDTO), HttpStatus.OK);
     }
 
-    @PutMapping("clientes")
+    @PutMapping("/clientes")
     public ResponseEntity<ClienteDTO> actualizarCliente(@RequestBody ClienteUpdateDTO clienteUpdateDTO){
         return new ResponseEntity<>(clienteService.actualizarCliente(clienteUpdateDTO),HttpStatus.OK);
     }
 
     @DeleteMapping("/clientes/{clienteId}")
-    public ResponseEntity<String> eliminarCliente(@PathVariable("clienteId") long clienteId){
+    public ResponseEntity<ClienteDTO> eliminarCliente(@PathVariable("clienteId") long clienteId){
         return new ResponseEntity<>(clienteService.eliminarCliente(clienteId),HttpStatus.OK);
     }
 }

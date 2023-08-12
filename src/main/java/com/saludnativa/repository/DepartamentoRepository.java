@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface DepartamentoRepository extends JpaRepository<Departamento, String> {
 
-    List<Departamento> findDepartamentosByProvincia(Provincia provincia);
+
 }
